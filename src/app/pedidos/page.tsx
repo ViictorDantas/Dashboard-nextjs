@@ -30,12 +30,13 @@ const pedidos = [
 
 export default function Pedidos() {
   return (
-    <main className="sm:ml-14 p-4">
+    <main className="sm:ml-40 p-4">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-600">Pedidos</h1>
-        <p className="text-gray-500">Uma lista dos seus pedidos recentes.</p>
-
-        <TablePedidos pedidos={pedidos} itemsPerPage={20} />
+        <h1 className="text-[28px] text-[#12577B] pt-20 font-bold text-center md:text-start">Pedidos</h1>
+        <div className="retangulo ">
+          <p className="text-gray-500">Uma lista dos seus pedidos recentes.</p>
+          <TablePedidos data={pedidos} itemsPerPage={20} />
+        </div>
       </div>
     </main>
   )

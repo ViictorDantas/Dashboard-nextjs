@@ -1,18 +1,23 @@
+"use client";
+
+import { useState } from "react";
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
 import { Button } from '../ui/button';
 import { Home, LogOut, Package, PanelBottom, Settings2, ShoppingBag, User } from 'lucide-react';
 import Link from "next/link";
-import { TooltipProvider, TooltipContent, TooltipTrigger, Tooltip } from '../ui/tooltip';
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export function Sidebar() {
+    const [open, setOpen] = useState(false);
+
   return (
     <div className="flex w-full flex-col bg-muted/40">
 
-        <aside className='fixed inset-y-0 left-0 z-10 hidden w-14 border-r
+        <aside className='fixed inset-y-0 left-0 z-10 hidden w-40 border-r
         bg-background sm:flex flex-col'>
 
-            <nav className='flex flex-col items-center gap-4 px-2 py-5'>
-                <TooltipProvider>
+            <nav className='flex flex-col items-start gap-4 px-2 py-5'>
+                
                     <Link href='#'
                     className='flex h-9 w-9 shrink-0 items-center justify-center bg-primary
                     text-primary-foreground rounded-full'
@@ -21,90 +26,82 @@ export function Sidebar() {
                     <Package className='h-4 w-4'/>
                     <span className='sr-only'>Dashboard Avatar</span>
                     </Link>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='/'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <Home className='h-5 w-5'/>
-                                <span className='sr-only'>Inicio</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Inicio</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='/pedidos'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <ShoppingBag className='h-5 w-5'/>
-                                <span className='sr-only'>Pedidos</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Pedidos</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='#'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <Package className='h-5 w-5'/>
-                                <span className='sr-only'>Produtos</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Produtos</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='#'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <User className='h-5 w-5'/>
-                                <span className='sr-only'>Clientes</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Clientes</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='#'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <Settings2 className='h-5 w-5'/>
-                                <span className='sr-only'>Configurações</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Configurações</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                    <Link
+                        href='/'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <Home className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Inicio</span>
+                    </Link>
+                    <Link
+                        href='/pedidos'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <ShoppingBag className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Relatório</span>
+                    </Link>
+                    <Link
+                        href='/ponto'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <Package className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Meus Pontos</span>
+                    </Link>
+                    <Link
+                        href='/'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <Package className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Aulas</span>
+                    </Link>
+                    <Link
+                        href='/colaboradores'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <User className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Colaboradores</span>
+                    </Link>
+                    <Link
+                        href='/'
+                        className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'
+                        >
+                        <Settings2 className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Configurações</span>
+                    </Link>
+                
             </nav>
 
-            <nav className='mt-auto flex flex-col items-center gap-4 px-2 py-5'>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link href='#'
-                                className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground
-                                transitions-colors hover:text-foreground'
-                                >
-                    
-                                <LogOut className='h-5 w-5 text-red-500'/>
-                                <span className='sr-only'>Sair</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Sair</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+            <nav className='mt-auto flex flex-col items-start gap-4 px-2 py-5'>
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogTrigger asChild>
+                        <button className='flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground transition-colors'>
+                        <LogOut className='h-5 w-5' />
+                        <span className='text-sm font-medium'>Sair</span>
+                        </button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                        <DialogTitle>Tem certeza que deseja sair?</DialogTitle>
+                        <DialogDescription>
+                            Você será desconectado da sua conta.
+                        </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex justify-end gap-2">
+                        <button 
+                            onClick={() => setOpen(false)}
+                            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors"
+                        >
+                            Cancelar
+                        </button>
+                        <Link 
+                            href='/logout' 
+                            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors"
+                        >
+                            Sair
+                        </Link>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </nav>
         </aside>
 
